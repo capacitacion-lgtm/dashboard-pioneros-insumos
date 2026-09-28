@@ -70,7 +70,63 @@
 .ops-grid{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:10px}.ops-field label{display:block;font-size:8px;text-transform:uppercase;font-weight:900;color:var(--mut);margin:0 0 5px}.ops-field select,.ops-field textarea{width:100%;border:1px solid #dfe8e4;border-radius:10px;padding:9px;background:#fff;font:inherit;font-size:9px;box-sizing:border-box}.ops-field textarea{min-height:66px;resize:vertical}.ops-save{align-self:end;border:0;background:var(--g);color:#fff;border-radius:10px;padding:9px 12px;font-size:9px;font-weight:900;cursor:pointer}.ops-next{margin-top:9px;padding:9px 11px;background:#fff;border-radius:10px;border:1px dashed #cbdcd5;font-size:9px}.ops-next b{color:var(--g)}
 .access-evidence-row{margin-top:8px;padding:8px 10px;background:#f7faf8;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}.access-evidence-row small{font-size:8px;color:var(--mut)}.access-evidence-row a{font-size:8px;font-weight:900;color:var(--g);text-decoration:none;border:1px solid #cfe7dc;padding:5px 8px;border-radius:8px;background:#fff}
 @media(max-width:900px){.ops-grid{grid-template-columns:1fr}.ops-save{width:100%}}
-</style><style>.access-checks{display:grid;gap:8px;margin-top:8px}.access-check{border:1px solid #e3ece8;border-radius:12px;padding:10px;background:#fff}.access-check-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.access-check-name{font-weight:900;font-size:10px}.access-evidence{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.access-evidence a{font-size:8px;font-weight:900;text-decoration:none;border:1px solid #cfe7dc;background:#f7fbf9;color:var(--g);padding:6px 8px;border-radius:8px}.access-toggle{display:flex;gap:5px;margin-top:8px}.access-toggle button{border:1px solid #d9e5e0;background:#fff;color:var(--mut);padding:6px 9px;border-radius:8px;font-size:8px;font-weight:900;cursor:pointer}.access-toggle button.on.yes{background:#e8f7ee;color:#13734a;border-color:#bfe2cf}.access-toggle button.on.no{background:#fff0ed;color:#b42318;border-color:#f0c8c1}.hubspot-status{margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.hubspot-status button{border:1px solid #d9e5e0;background:#fff;color:var(--mut);padding:7px 5px;border-radius:8px;font-size:8px;font-weight:900;cursor:pointer}.hubspot-status button.on{background:#e8f7ee;color:#13734a;border-color:#bfe2cf}.access-alert{margin-top:8px;padding:8px 10px;border-radius:10px;background:#fff0ed;color:#9f261d;font-size:8px;font-weight:900}.access-alert.access-ok{background:#e8f7ee;color:#13734a}.access-team-card{margin-top:12px;padding:12px;border-radius:14px;background:#f7faf8;border:1px solid #e0eae5}.access-team-card h4{margin:0 0 7px;font-size:9px}.access-team-card p{margin:3px 0;font-size:8px;color:var(--mut)}.access-team-card b{color:var(--ink)}</style></head><body>
+</style><style>.access-checks{display:grid;gap:8px;margin-top:8px}.access-check{border:1px solid #e3ece8;border-radius:12px;padding:10px;background:#fff}.access-check-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.access-check-name{font-weight:900;font-size:10px}.access-evidence{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.access-evidence a{font-size:8px;font-weight:900;text-decoration:none;border:1px solid #cfe7dc;background:#f7fbf9;color:var(--g);padding:6px 8px;border-radius:8px}.access-toggle{display:flex;gap:5px;margin-top:8px}.access-toggle button{border:1px solid #d9e5e0;background:#fff;color:var(--mut);padding:6px 9px;border-radius:8px;font-size:8px;font-weight:900;cursor:pointer}.access-toggle button.on.yes{background:#e8f7ee;color:#13734a;border-color:#bfe2cf}.access-toggle button.on.no{background:#fff0ed;color:#b42318;border-color:#f0c8c1}.hubspot-status{margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.hubspot-status button{border:1px solid #d9e5e0;background:#fff;color:var(--mut);padding:7px 5px;border-radius:8px;font-size:8px;font-weight:900;cursor:pointer}.hubspot-status button.on{background:#e8f7ee;color:#13734a;border-color:#bfe2cf}.access-alert{margin-top:8px;padding:8px 10px;border-radius:10px;background:#fff0ed;color:#9f261d;font-size:8px;font-weight:900}.access-alert.access-ok{background:#e8f7ee;color:#13734a}.access-team-card{margin-top:12px;padding:12px;border-radius:14px;background:#f7faf8;border:1px solid #e0eae5}.access-team-card h4{margin:0 0 7px;font-size:9px}.access-team-card p{margin:3px 0;font-size:8px;color:var(--mut)}.access-team-card b{color:var(--ink)}</style><style>
+/* AVIVA visual refresh */
+:root{
+ --purple:#9b55d8;--blue:#2497e3;--pink:#e35a9d;--teal:#20b2b0;--orange:#f47d2a;--yellow:#f7bc19;
+ --g:#006b57;--gd:#003f35;--a:#11b981;--m:#e9f8f2;--m2:#dff5eb;
+ --ink:#083c3a;--mut:#5f706d;--line:#dbe8e4;--bg:#f7faf9;--shadow:0 12px 30px rgba(8,60,58,.07)
+}
+body{font-size:15px}
+.side{background:linear-gradient(180deg,#e8f7f2 0%,#f7faf9 100%)}
+.wordmark{font-size:31px}
+nav button{font-size:14px;padding:13px 14px}
+.hero h1{font-size:43px}
+.kpi .num{font-size:34px}
+.kpi .label{font-size:10px}
+.panel h2{font-size:20px}
+.bar-name,.bar-val{font-size:12px}
+.profile-card{border-radius:26px;padding:24px}
+.profile-title{font-size:31px;letter-spacing:-.8px}
+.profile-sub{font-size:13px}
+.profile-command{gap:11px}
+.profile-metric{padding:15px 16px;border-radius:16px}
+.profile-metric b{font-size:27px}
+.profile-metric span{font-size:9px}
+.profile-grid{gap:14px}
+.profile-box{padding:17px;border-radius:18px;background:#fff}
+.profile-box:nth-child(1){border-top:5px solid var(--purple)}
+.profile-box:nth-child(2){border-top:5px solid var(--blue)}
+.profile-box:nth-child(3){border-top:5px solid var(--pink)}
+.profile-box h3{font-size:14px;letter-spacing:.4px}
+.profile-dl{gap:10px}
+.profile-dl div{padding:11px;border:1px solid #edf2f0}
+.profile-dl small{font-size:8px}
+.profile-dl b{font-size:13px}
+.tool-list{gap:9px}
+.tool-row{padding:11px 12px;border-radius:13px}
+.tool-name{font-size:11px}
+.tool-status{font-size:9px;padding:6px 9px}
+.tool-btn{font-size:9px;padding:7px 10px}
+.profile-note{font-size:10px}
+.access-check{padding:13px;border-radius:15px}
+.access-check-name{font-size:12px}
+.access-evidence a,.access-toggle button,.hubspot-status button{font-size:9px;padding:8px 11px}
+.access-alert{font-size:10px}
+.access-team-card h4{font-size:10px}
+.access-team-card p{font-size:9px}
+/* color-coded section headers */
+.profile-box:nth-child(1) h3{color:var(--purple)}
+.profile-box:nth-child(2) h3{color:var(--blue)}
+.profile-box:nth-child(3) h3{color:var(--pink)}
+.profile-box:nth-child(1) .profile-dl div{background:#fbf7ff}
+.profile-box:nth-child(2) .tool-row{background:#f8fcff}
+.profile-box:nth-child(3) .access-check{background:#fffafd}
+.profile-box:nth-child(3) .access-toggle button.on.yes{background:#e8f8f1;border-color:#a9dec9;color:#006b57}
+.profile-box:nth-child(3) .access-toggle button.on.no{background:#fff0f5;border-color:#efb9ce;color:#b1265e}
+.profile-box:nth-child(3) .hubspot-status button.on{background:#fff0f5;border-color:#efb9ce;color:#b1265e}
+.profile-box:nth-child(3) .access-alert{background:#fff0f5;color:#b1265e}
+</style></head><body>
 <div class="app"><aside class="side"><div class="brand"><div class="wordmark">AVIVA</div><small>CONTROL DE PIONEROS · INSUMOS</small></div><div class="bubble"><b>¿Dónde hace falta actuar?</b><span>Un tablero para escuchar los datos, encontrar los pendientes y dar seguimiento puntual por tienda y colaborador.</span></div><nav><button type="button" class="active" data-tab="resumen" onclick="nav('resumen')">01 · General</button><button data-tab="seguimiento" onclick="nav('seguimiento')">02 · Colaboradores</button><button data-tab="planEnvio" onclick="nav('planEnvio')">03 · Herramientas</button><button data-tab="cobertura" onclick="nav('cobertura')">04 · Pendientes por responder</button><button data-tab="accesos" onclick="nav('accesos')">05 · Accesos</button></nav><div class="side-foot">Tu historia importa.<br>Los datos también cuentan una historia: úsala para acompañar mejor.</div></aside><main class="main">
 <section class="hero" id="resumen"><div class="eyebrow">Pioneros · septiembre 2026</div><h1>¿Qué necesita atención hoy?</h1><p>Una vista operativa para cruzar respuestas, inventario, tallas y cobertura de tiendas. Filtra por <b>tienda</b> o <b>colaborador</b> y baja directo al seguimiento.</p><div class="tag">Conversaciones que se convierten en acciones</div></section>
 <section class="filters">
@@ -208,7 +264,7 @@ function renderProfile(){
  const r=R.find(x=>x.pionero===name); if(!r){host.innerHTML='<div class="profile-empty">No se encontró la ficha.</div>';return}
  const st=profileStore(r),ac=profileAccess(r),days=ageDays(r);
  const items=[...POLICY.base,...(POLICY.clothing[r.format]||[]),...POLICY.deferred];
- const unique=[...new Set(items)]; const allItems=unique;const required=allItems.filter(a=>profileArticleState(r,a)!=='notyet');const itemHave=required.filter(a=>profileArticleState(r,a)==='ok'||isConfirmed(name+'|'+a)).length;const itemPending=required.filter(a=>profileArticleState(r,a)==='send'&&!isConfirmed(name+'|'+a)).length;const accessNames=['Slack','Paneles','HubSpot','Buscar clientes'];const accessDone=accessNames.filter(a=>isConfirmed(name+'|'+a)).length;const evidenceCount=[ac?.[5],ac?.[6]].filter(Boolean).length;const completion=Math.round(((itemHave+accessDone)/(required.length+accessNames.length))*100);
+ const unique=[...new Set(items)]; const allItems=unique;const required=allItems.filter(a=>profileArticleState(r,a)!=='notyet');const itemHave=required.filter(a=>profileArticleState(r,a)==='ok'||isConfirmed(name+'|'+a)).length;const itemPending=required.filter(a=>profileArticleState(r,a)==='send'&&!isConfirmed(name+'|'+a)).length;const accessNames=['Slack','Paneles','HubSpot','Buscar clientes'];const aw0=accessWorkflow(name);const accessDone=(isConfirmed(name+'|Slack')?1:0)+(aw0.panels!==null?1:0)+(aw0.hubspot==='Ya tiene acceso'?1:0)+(aw0.clients!==null?1:0);const evidenceCount=[ac?.[5],ac?.[6]].filter(Boolean).length;const completion=Math.round(((itemHave+accessDone)/(required.length+accessNames.length))*100);
  const rows=unique.map(a=>{const s=profileArticleState(r,a),key=name+'|'+a,done=isConfirmed(key);let status=s==='ok'?'Tiene':s==='notyet'?'Aún no aplica':done?'Validado':'Falta';let cls=s==='ok'?'have':s==='notyet'?'wait':done?'done':'miss';return '<div class="tool-row"><span class="tool-name">'+esc(a)+'</span><span class="tool-status '+cls+'">'+status+'</span>'+((s==='send'&&!done)?'<button type="button" class="tool-btn primary" onclick="confirmItem('+JSON.stringify(name)+','+JSON.stringify(a)+')">✓ Confirmar</button>':done?'<button type="button" class="tool-btn" disabled>✓ Validado</button>':'<span></span>')+'</div>'}).join('');
  const aw=accessWorkflow(name);
  const accessRows='<div class="access-checks">'+
@@ -218,7 +274,7 @@ function renderProfile(){
  '</div><div class="profile-note">Revisa la evidencia y después marca <b>Sí tiene</b> o <b>No tiene</b>. HubSpot se controla con <b>Pendiente → Enviado → Ya tiene acceso</b>.</div>'; const ops=opsData(name);
  const statusOptions=['Pendiente','En proceso','En espera de insumos','En proceso de activación','Activada','Entrega en proceso','Entregado / por validar','Cerrado','Bloqueado'];
  const opsHtml='<div class="ops-panel"><div class="ops-head"><h3>04 · SEGUIMIENTO OPERATIVO</h3><span>Última actualización: '+(ops.updatedAt?new Date(ops.updatedAt).toLocaleString('es-MX'):'Sin registrar')+'</span></div><div class="ops-grid"><div class="ops-field"><label>Estatus general</label><select id="opsStatus">'+statusOptions.map(s=>'<option '+(ops.status===s?'selected':'')+'>'+s+'</option>').join('')+'</select></div><div class="ops-field"><label>Comentarios / pendientes</label><textarea id="opsComment" placeholder="Ej. Falta gafete; HubSpot validado; esperando activación de tienda...">'+esc(ops.comment||'')+'</textarea></div><div class="ops-field"><label>Próxima acción</label><textarea id="opsNext" placeholder="Ej. Confirmar envío con logística mañana.">'+esc(ops.next||'')+'</textarea></div></div><div style="display:flex;justify-content:flex-end;margin-top:9px"><button type="button" class="ops-save" onclick="saveOps('+JSON.stringify(name)+')">Guardar seguimiento</button></div><div class="ops-next"><b>Lectura rápida:</b> '+esc(ops.status||'Pendiente')+(ops.next?' · Próximo: '+esc(ops.next):' · Define una próxima acción para no perder el seguimiento.')+'</div></div>'; host.innerHTML='<div class="profile-top"><div><div class="profile-title">'+esc(r.pionero)+'</div><div class="profile-sub">'+esc(r.format)+' · '+esc(r.k)+'</div></div><span class="pill '+(itemPending+accessNames.length-accessDone>0?'warn':'green')+'">'+(itemPending+accessNames.length-accessDone>0?(itemPending+accessNames.length-accessDone)+' PENDIENTES':'TODO VALIDADO')+'</span></div>'+
- '<div class="profile-command"><div class="profile-metric"><b>'+itemHave+'</b><span>Elementos resueltos</span></div><div class="profile-metric"><b>'+itemPending+'</b><span>Elementos por enviar</span></div><div class="profile-metric"><b>'+accessDone+'/3</b><span>Accesos validados</span></div><div class="profile-metric"><b>'+completion+'%</b><span>Ficha completada</span></div></div><div class="profile-progress"><i style="width:'+completion+'%"></i></div>'+
+ '<div class="profile-command"><div class="profile-metric"><b>'+itemHave+'</b><span>Elementos resueltos</span></div><div class="profile-metric"><b>'+itemPending+'</b><span>Elementos por enviar</span></div><div class="profile-metric"><b>'+accessDone+'/4</b><span>Accesos validados</span></div><div class="profile-metric"><b>'+completion+'%</b><span>Ficha completada</span></div></div><div class="profile-progress"><i style="width:'+completion+'%"></i></div>'+
  '<div class="profile-grid">'+
  '<div class="profile-box"><h3>01 · INFORMACIÓN PERSONAL</h3><div class="profile-dl"><div><small>Formato</small><b>'+esc(r.format)+'</b></div><div><small>Talla</small><b>'+esc(sz(r.talla))+'</b></div><div><small>Ingreso</small><b>'+esc(r.ingreso||'—')+'</b></div><div><small>Días en equipo</small><b>'+days+'</b></div><div><small>Estado</small><b>'+esc(st?.[1]||'—')+'</b></div><div><small>Activación</small><b>'+esc(st?.[5]||'—')+'</b></div><div><small>Ciudad</small><b>'+esc(st?.[4]||'—')+'</b></div><div><small>Determinante</small><b>'+esc(st?.[3]||'—')+'</b></div></div></div>'+
  '<div class="profile-box"><h3>02 · ELEMENTOS DE TRABAJO</h3><div class="tool-list">'+rows+'</div><div class="profile-note">“Falta” significa que corresponde y todavía no está registrado. “Validado” significa que tú confirmaste la solución.</div></div>'+

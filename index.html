@@ -197,7 +197,7 @@ function saveAccessWorkflow(name,patch){let all={};try{all=JSON.parse(localStora
 function setAccessYN(name,key,value){saveAccessWorkflow(name,{[key]:value})}
 function setHubspotStatus(name,value){saveAccessWorkflow(name,{hubspot:value})}
 function profileStore(r){const n=norm(r.k);return STORE_MASTER.find(x=>n.includes(norm(x[4]))||norm(x[4]).includes(n))||STORE_MASTER.find(x=>norm(r.k).includes(norm(x[0])))||null}
-function profileAccess(r){const n=norm(r.n);return (typeof ACCESS_EVIDENCE!=='undefined'?ACCESS_EVIDENCE:[]).find(x=>norm(x[1])===n)||null}
+function profileAccess(r){const n=norm(r.pionero||r.n);const st=profileStore(r);const code=st?.[0]?norm(st[0]):'';return (typeof ACCESS_EVIDENCE!=='undefined'?ACCESS_EVIDENCE:[]).find(x=>(code&&norm(x[0])===code)||norm(x[1])===n)||null}
 function profileArticleState(r,a){return articleState(r,a)}
 function opsData(name){try{return JSON.parse(localStorage.getItem('aviva_ops_v1')||'{}')[name]||{status:'Pendiente',comment:'',next:''}}catch(e){return{status:'Pendiente',comment:'',next:''}}}
 function saveOps(name){const status=document.getElementById('opsStatus')?.value||'Pendiente',comment=document.getElementById('opsComment')?.value||'',next=document.getElementById('opsNext')?.value||'';let all={};try{all=JSON.parse(localStorage.getItem('aviva_ops_v1')||'{}')}catch(e){}all[name]={status,comment,next,updatedAt:new Date().toISOString()};localStorage.setItem('aviva_ops_v1',JSON.stringify(all));renderProfile()}

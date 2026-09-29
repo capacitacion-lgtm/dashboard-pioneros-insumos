@@ -269,15 +269,15 @@ th{font-weight:700;letter-spacing:.6px}
  <div class="calc-head"><div><h3>Calculadora de objetivos comerciales</h3><p>Define los promedios por vertical y convierte la meta de cada tienda en clientes, solicitudes y ritmo esperado a la fecha.</p></div><select id="calcFormat"><option value="Walmart">Walmart</option><option value="SBA">SBA</option><option value="Sam’s">Sam’s</option></select></div>
  <div class="calc-format-averages" id="calcFormatAverages"></div>
  <div class="calc-params">
-  <label>Ticket promedio MX$<input type="number" id="calcTicket" min="1" step="1"></label>
-  <label>Tasa desembolso %<input type="number" id="calcDisbRate" min="1" max="100" step=".1"></label>
-  <label>Tasa aprobación %<input type="number" id="calcApprovalRate" min="1" max="100" step=".1"></label>
-  <label>Días hábiles del mes<input type="number" id="calcWorkdays" min="1" max="31" step="1"></label>
-  <label>Días transcurridos<input type="number" id="calcElapsed" min="0" max="31" step="1"></label>
+  <label>Ticket promedio MX$<input type="number" id="calcTicket" min="1" step="1" placeholder="Capturar"></label>
+  <label>Tasa desembolso %<input type="number" id="calcDisbRate" min="1" max="100" step=".1" placeholder="Capturar"></label>
+  <label>Tasa aprobación %<input type="number" id="calcApprovalRate" min="1" max="100" step=".1" placeholder="Capturar"></label>
+  <label>Días hábiles del mes<input type="number" id="calcWorkdays" min="1" max="31" step="1" placeholder="Capturar"></label>
+  <label>Día de avance<input type="number" id="calcElapsed" min="0" max="31" step="1" placeholder="Capturar"></label>
   <label>Días por semana<input type="number" id="calcDaysWeek" min="1" max="7" step="1"></label>
   <button type="button" class="row-btn" id="calcSaveParams">Guardar promedios</button>
  </div>
- <div class="calc-note">Los promedios son editables por vertical y por mes. Como referencia inicial del Excel se usa ticket MX$7,770, 60% de desembolso y 6 días por semana; la tasa de aprobación queda para captura por vertical.</div>
+ <div class="calc-note">Captura los parámetros reales de cada vertical y mes. Ticket promedio, tasa de desembolso, tasa de aprobación, días hábiles y día de avance se guardan de forma independiente para Walmart, SBA y Sam’s.</div>
  <div class="calc-table"><div class="calc-row head"><b>Tienda / colaborador</b><b>Meta $</b><b>Clientes objetivo</b><b>Clientes/sem</b><b>Clientes/día</b><b>Solicitudes objetivo</b><b>Solicitudes/sem</b><b>Solicitudes/día</b><b>Esperado hoy</b><b>Avance real</b></div><div id="calcRows"></div></div>
 </div>
 </section><section class="access-center" id="accesos">
@@ -301,7 +301,7 @@ function renderMetricFormat(){var sel=document.getElementById('metricFormatSelec
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-metric-view]');if(b)setMetricView(b.dataset.metricView)});
 document.addEventListener('change',function(e){if(e.target&&e.target.id==='metricFormatSelect')renderMetricFormat()});
 function calcKey(){return 'aviva_calc_params_v1_'+metricMonthKey()}
-function calcParamsAll(){var base={Walmart:{ticket:7770,disb:60,approval:33,workdays:26,elapsed:0,daysWeek:6},SBA:{ticket:7770,disb:60,approval:33,workdays:26,elapsed:0,daysWeek:6},'Sam’s':{ticket:7770,disb:60,approval:33,workdays:26,elapsed:0,daysWeek:6}};try{var s=JSON.parse(localStorage.getItem(calcKey())||'{}');Object.keys(base).forEach(function(k){base[k]=Object.assign({},base[k],s[k]||{})})}catch(e){}return base}
+function calcParamsAll(){var base={Walmart:{ticket:0,disb:0,approval:0,workdays:0,elapsed:0,daysWeek:6},SBA:{ticket:0,disb:0,approval:0,workdays:0,elapsed:0,daysWeek:6},'Sam’s':{ticket:0,disb:0,approval:0,workdays:0,elapsed:0,daysWeek:6}};try{var s=JSON.parse(localStorage.getItem(calcKey())||'{}');Object.keys(base).forEach(function(k){base[k]=Object.assign({},base[k],s[k]||{})})}catch(e){}return base}
 function calcTargetsKey(){return 'aviva_calc_targets_v1_'+metricMonthKey()}
 function calcTargets(){try{return JSON.parse(localStorage.getItem(calcTargetsKey())||'{}')}catch(e){return{}}}
 function saveCalcParams(){var fmt=document.getElementById('calcFormat').value,all=calcParamsAll();all[fmt]={ticket:+calcTicket.value||0,disb:+calcDisbRate.value||0,approval:+calcApprovalRate.value||0,workdays:+calcWorkdays.value||0,elapsed:+calcElapsed.value||0,daysWeek:+calcDaysWeek.value||6};localStorage.setItem(calcKey(),JSON.stringify(all));renderCommercialCalculator()}

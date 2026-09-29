@@ -262,14 +262,22 @@ function selectedRows(){let q=(document.getElementById('search').value||'').toLo
 function sendableCount(r){const articles=[...POLICY.base,...(POLICY.clothing[r.format]||[]),...POLICY.deferred];return articles.filter(a=>articleState(r,a)==='send').length}
 function pendingReview(r){const articles=[...POLICY.base,...(POLICY.clothing[r.format]||[]),...POLICY.deferred];return articles.filter(a=>articleState(r,a)==='send'||articleState(r,a)==='notyet').length}
 function filtered(){return selectedRows()}
-function dependentOptions(rows){
- const f=document.getElementById('filterFormat').value, st=document.getElementById('filterStore').value, pe=document.getElementById('filterPerson').value;
- const stores=S.filter(s=>!f||s.format===f); const persons=R.filter(r=>(!f||r.format===f)&&(!st||st===r.code+' · '+r.store));
+function dependentOptions(){
+ const ff=document.getElementById('filterFormat'),fs=document.getElementById('filterStore'),fp=document.getElementById('filterPerson');
+ const f=ff?ff.value:'',st=fs?fs.value:'',pe=fp?fp.value:'';
+ const stores=S.filter(function(s){return !f||s.format===f});
+ const persons=R.filter(function(r){return (!f||r.format===f)&&(!st||st===r.code+' · '+r.store)});
  const curStore=st,curPerson=pe;
- fillSelect('filterStore',stores.map(x=>x.code+' · '+x.store),'Todas');document.getElementById('filterStore').value=stores.some(x=>x.code+' · '+x.store===curStore)?curStore:'';
- fillSelect('filterPerson',persons.map(x=>x.pionero),'Todos');document.getElementById('filterPerson').value=persons.some(x=>x.pionero===curPerson)?curPerson:'';
+ fillSelect('filterStore',stores.map(function(x){return x.code+' · '+x.store}),'Todas');
+ fs.value=stores.some(function(x){return x.code+' · '+x.store===curStore})?curStore:'';
+ fillSelect('filterPerson',persons.map(function(x){return x.pionero}),'Todos');
+ fp.value=persons.some(function(x){return x.pionero===curPerson})?curPerson:'';
 }
-function init(){fillSelect('filterStore',S.map(x=>x.code+' · '+x.store),'Todas');fillSelect('filterPerson',R.map(x=>x.pionero));}
+function init(){
+ fillSelect('filterFormat',R.map(function(x){return x.format}),'Todos');
+ fillSelect('filterStore',S.map(function(x){return x.code+' · '+x.store}),'Todas');
+ fillSelect('filterPerson',R.map(function(x){return x.pionero}),'Todos');
+}
 function renderArticleChips(){
  const a=['Playera blanca','Chaleco','Tablet','SIM','Gafete','Lanyard','Mochila','Name Tag','PIN AVi'];const cur=document.getElementById('filterArticle').value;
  articleChips.innerHTML='<button type="button" class="article-chip '+(!cur?'on':'')+'" onclick="pickArticle(\'\')">Todos</button>'+a.map(x=>'<button type="button" class="article-chip '+(cur===x?'on':'')+'" onclick="pickArticle(\''+x.replace(/'/g,"\\'")+'\')">'+x+'</button>').join('');

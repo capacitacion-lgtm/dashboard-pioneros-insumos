@@ -374,7 +374,7 @@ document.addEventListener('click',function(e){
 function setHubspotStatus(name,value){
   saveAccessWorkflow(name,{hubspot:value});
 }
-function profileStore(r){const n=norm(r.k);return STORE_MASTER.find(x=>n.includes(norm(x[4]))||norm(x[4]).includes(n))||STORE_MASTER.find(x=>norm(r.k).includes(norm(x[0])))||null}
+function profileStore(r){const code=String(r.code||'').replace(/\D/g,'').replace(/^0+(?=\d)/,'');const person=norm(r.pionero||r.n||'');const store=norm(r.store||r.k||'');const byCode=code&&STORE_MASTER.find(x=>String(x[0]||'').replace(/\D/g,'').replace(/^0+(?=\d)/,'')===code);if(byCode)return byCode;const byPerson=person&&STORE_MASTER.find(x=>norm(x[6])===person);if(byPerson)return byPerson;return store?STORE_MASTER.find(x=>norm(x[4])===store)||STORE_MASTER.find(x=>store.includes(norm(x[4]))||norm(x[4]).includes(store)):null}
 function profileAccess(r){const n=norm(r.pionero||r.n);const st=profileStore(r);const code=st?.[0]?norm(st[0]):'';return (typeof ACCESS_EVIDENCE!=='undefined'?ACCESS_EVIDENCE:[]).find(x=>(code&&norm(x[0])===code)||norm(x[1])===n)||null}
 function profileArticleState(r,a){return articleState(r,a)}
 function opsData(name){try{return JSON.parse(localStorage.getItem('aviva_ops_v1')||'{}')[name]||{status:'Pendiente',comment:'',next:''}}catch(e){return{status:'Pendiente',comment:'',next:''}}}

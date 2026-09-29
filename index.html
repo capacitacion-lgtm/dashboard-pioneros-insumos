@@ -436,10 +436,7 @@ function applyMetricFromButton(btn){
  try{localStorage.setItem('aviva_metrics_v1',JSON.stringify(d))}catch(e){}
  renderMetrics();
 }
-metricGrid.addEventListener('click',function(e){
- const btn=e.target.closest('.metric-update-btn');if(!btn)return;
- e.preventDefault();applyMetricFromButton(btn);
-});
+document.onclick=function(e){var b=e.target.closest&&e.target.closest('.metric-update-btn');if(!b)return;e.preventDefault();var card=b.closest('.metric-card'),input=card&&card.querySelector('input[type="number"]'),fmt=b.getAttribute('data-metric-format');if(!input||!fmt)return;var d=metricData();d[fmt]=Number(input.value)||0;try{localStorage.setItem('aviva_metrics_v1',JSON.stringify(d))}catch(err){}renderMetrics()}
 function coverageMovesData(){try{return JSON.parse(localStorage.getItem('aviva_coverage_moves_v1')||'[]')}catch(e){return[]}}
 function saveCoverageMoves(d){localStorage.setItem('aviva_coverage_moves_v1',JSON.stringify(d));renderCoverageMoves()}
 function addCoverageMove(){const d=coverageMovesData();d.push({store:'',format:'Walmart',type:'Cobertura',date:'',status:'Planeada'});saveCoverageMoves(d)}

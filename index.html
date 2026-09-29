@@ -290,7 +290,7 @@ function plan(rows){
 const METRIC_GOALS={Walmart:2200,SBA:2400,'Sam’s':1100};
 function metricData(){try{return JSON.parse(localStorage.getItem('aviva_metrics_v1')||'{}')}catch(e){return{}}}
 function saveMetric(fmt,v){const d=metricData();d[fmt]=Number(v)||0;localStorage.setItem('aviva_metrics_v1',JSON.stringify(d));renderMetrics()}
-function money(n){return 'MXfillSelect('waveFilter',STORE_MASTER.map(x=>x[5]).filter(Boolean).sort(),'Todas');fillSelect('waveStateFilter',STORE_MASTER.map(x=>x[1]),'Todos');['waveFilter','waveStateFilter','waveFormatFilter'].forEach(id=>document.getElementById(id).addEventListener('change',renderWaves))}
+function money(n){return 'MX$ '+Number(n||0).toLocaleString('es-MX')}
 function renderWaves(){
  const wf=waveFilter.value,ws=waveStateFilter.value,wf2=waveFormatFilter.value;
  const rows=STORE_MASTER.filter(x=>(!wf||x[5]===wf)&&(!ws||x[1]===ws)&&(!wf2||x[2]===wf2));
@@ -409,7 +409,7 @@ document.getElementById('filterSize').addEventListener('change',render);
 document.getElementById('filterStatus').addEventListener('change',render);
 document.getElementById('search').addEventListener('input',render);
 init();initWaves();renderMetrics();renderCoverageMoves();render();;document.querySelectorAll('.filters select,.filters input').forEach(e=>e.addEventListener('input',render));rosterFormat.addEventListener('change',missing);document.querySelectorAll('.subtabs button').forEach(b=>b.addEventListener('click',()=>{rosterFormat.value=b.dataset.f;missing()}));render();
-</script><div class="preview-modal" id="previewModal"><div class="preview-box"><button type="button" class="preview-close" onclick="closePreview()">×</button><iframe id="previewFrame" title="Evidencia"></iframe></div></div></body></html>+Number(n||0).toLocaleString('es-MX')}
+
 function renderMetrics(){const d=metricData();metricGrid.innerHTML=Object.entries(METRIC_GOALS).map(([fmt,goal])=>{const a=Number(d[fmt]||0),p=goal?Math.round(a/goal*100):0;return '<div class="metric-card"><h3>'+esc(fmt)+'</h3><div class="goal">Meta septiembre · '+money(goal)+'</div><div class="metric-input"><span>MX$</span><input type="number" min="0" step="1" value="'+a+'" onchange="saveMetric('+attrJson(fmt)+',this.value)" placeholder="Avance actual"></div><div class="metric-pct">'+p+'%</div><div class="vertical-track"><i style="width:'+Math.min(p,100)+'%"></i></div></div>'}).join('');const total=Object.keys(METRIC_GOALS).reduce((n,k)=>n+Number(d[k]||0),0);metricActualTotal.textContent=money(total);metricPctTotal.textContent=Math.round(total/5700*100)+'%'}
 function coverageMovesData(){try{return JSON.parse(localStorage.getItem('aviva_coverage_moves_v1')||'[]')}catch(e){return[]}}
 function saveCoverageMoves(d){localStorage.setItem('aviva_coverage_moves_v1',JSON.stringify(d));renderCoverageMoves()}

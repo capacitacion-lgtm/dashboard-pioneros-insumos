@@ -294,6 +294,25 @@ th{font-weight:700;letter-spacing:.6px}
 .calc-goal-tier b{overflow-wrap:anywhere}
 @media(max-width:900px){.calc-two-goals{grid-template-columns:1fr!important}.calc-goal-tier{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:600px){.calc-goal-tier{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+</style><style>
+/* Calculadora: apilar definitivamente una ficha por tienda */
+#calcRows,
+.calc-rows,
+.calculator-rows,
+.calc-store-list{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  flex-direction:column!important;
+}
+#calcRows > .calc-store-card,
+.calc-rows > .calc-store-card,
+.calculator-rows > .calc-store-card,
+.calc-store-list > .calc-store-card{
+  grid-column:1 / -1!important;
+  width:100%!important;
+  max-width:none!important;
+  flex:0 0 100%!important;
+}
 </style></head><body>
 <div class="app"><aside class="side"><div class="brand"><img class="aviva-original-logo" src="https://images.crunchbase.com/image/upload/c_pad%2Cf_auto%2Cq_auto%3Aeco%2Cdpr_1/b34fd73568b34ce4a875b069f6eeda41?ik-sanitizeSvg=true" alt="Aviva"><small>CONTROL DE PIONEROS · INSUMOS</small></div><div class="bubble"><b>¿Dónde hace falta actuar?</b><span>Un tablero para escuchar los datos, encontrar los pendientes y dar seguimiento puntual por tienda y colaborador.</span></div><nav><button type="button" class="active" data-tab="resumen" onclick="nav('resumen')">01 · General</button><button data-tab="seguimiento" onclick="nav('seguimiento')">02 · Colaboradores</button><button data-tab="planEnvio" onclick="nav('planEnvio')">03 · Herramientas</button><button data-tab="cobertura" onclick="nav('cobertura')">04 · Pendientes por responder</button><button data-tab="accesos" onclick="nav('accesos')">05 · Accesos</button></nav><div class="workspace-switch"><button type="button" class="on" data-workspace="insumos">Insumos del personal</button><button type="button" data-workspace="metrics">Solo métricas</button></div><div class="sidebar-metric-tabs" id="sidebarMetricTabs"><span>MÉTRICAS</span><button type="button" class="on" data-metric-view="general">01 · General</button><button type="button" data-metric-view="vertical">02 · Metas por formato</button><button type="button" data-metric-view="calculator">03 · Calculadora</button></div><div class="side-foot">Tu historia importa.<br>Los datos también cuentan una historia: úsala para acompañar mejor.</div></aside><main class="main">
 <section class="hero" id="resumen"><div class="eyebrow">Pioneros · septiembre 2026</div><h1>¿Qué necesita atención hoy?</h1><p>Una vista operativa para cruzar respuestas, inventario, tallas y cobertura de tiendas. Filtra por <b>tienda</b> o <b>colaborador</b> y baja directo al seguimiento.</p><div class="tag">Conversaciones que se convierten en acciones</div></section>

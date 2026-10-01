@@ -563,7 +563,7 @@ document.addEventListener('click',function(e){
  var off=e.target.closest&&e.target.closest('.coverage-offboard-btn');
  if(off){e.preventDefault();var code=off.getAttribute('data-store-code'),name=off.getAttribute('data-person-name')||'este colaborador';if(!confirm('¿Dar de baja a '+name+'? La posición quedará POR COMPLETAR.'))return;var d=coverageOverrides();d[code]={vacant:true,offboardDate:new Date().toISOString().slice(0,10),updatedAt:new Date().toISOString()};try{localStorage.setItem('aviva_coverage_overrides_v1',JSON.stringify(d))}catch(err){}renderWaves();renderPace();return}
  var save=e.target.closest&&e.target.closest('.offboard-date-save');
- if(save){e.preventDefault();var card=save.closest('.coverage-position'),input=card&&card.querySelector('.offboard-date-input');if(!input)return;setOffboardDate(save.getAttribute('data-store-code'),input.value);return}
+ if(save){e.preventDefault();var card=save.closest('.wave-row')||save.closest('.coverage-position'),input=card&&card.querySelector('.offboard-date-input');if(!input)return;setOffboardDate(save.getAttribute('data-store-code'),input.value);return}
  var res=e.target.closest&&e.target.closest('.coverage-restore-btn');
  if(res){e.preventDefault();var code=res.getAttribute('data-store-code');closeVacancyToHistory(code,'');var d=coverageOverrides();delete d[code];try{localStorage.setItem('aviva_coverage_overrides_v1',JSON.stringify(d))}catch(err){}renderWaves();renderPace();renderCoverageHistory()}
 });

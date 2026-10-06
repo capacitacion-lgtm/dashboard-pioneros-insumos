@@ -427,6 +427,23 @@ th{font-weight:700;letter-spacing:.6px}
 </style><style>
 .pace-global-wrap{margin-top:22px}.pace-global-wrap .pace-format-card{max-width:none}.pace-global-wrap .pace-format-head{background:#006b55;color:#fff;border-bottom-color:#00c77b}.pace-global-wrap .pace-format-head b,.pace-global-wrap .pace-format-head strong{color:#fff}.pace-global-wrap .pace-format-body{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(420px,1.15fr);gap:22px;align-items:stretch}.pace-global-wrap .pace-global-left,.pace-global-wrap .pace-global-right{min-width:0}.pace-global-wrap .pace-progress-hero{height:100%;margin:0;display:flex;flex-direction:column;justify-content:center}.pace-global-wrap .pace-progress-value{font-size:58px}.pace-global-wrap .pace-need{margin-top:14px}.pace-global-wrap .pace-days-band{margin-top:14px}.pace-global-wrap .card-expanded .pace-format-body{grid-template-columns:1fr 1fr}
 @media(max-width:900px){.pace-global-wrap .pace-format-body,.pace-global-wrap .card-expanded .pace-format-body{grid-template-columns:1fr}}
+</style><style>
+/* Balance typography when an executive pace card is expanded */
+.pace-format-card.card-expanded .pace-format-head b{font-size:38px!important;line-height:1.05}
+.pace-format-card.card-expanded .pace-format-head strong{font-size:20px!important;line-height:1.2}
+.pace-format-card.card-expanded .pace-progress-label{font-size:12px!important}
+.pace-format-card.card-expanded .pace-progress-value{font-size:58px!important;line-height:1}
+.pace-format-card.card-expanded .pace-progress-money{font-size:17px!important}
+.pace-format-card.card-expanded .pace-stat,.pace-format-card.card-expanded .pace-gap-status{font-size:16px!important;padding:11px 2px!important}
+.pace-format-card.card-expanded .pace-stat b,.pace-format-card.card-expanded .pace-gap-status b{font-size:18px!important}
+.pace-format-card.card-expanded .pace-need-title{font-size:13px!important}
+.pace-format-card.card-expanded .pace-action b{font-size:24px!important;line-height:1.1}
+.pace-format-card.card-expanded .pace-action span{font-size:11px!important}
+.pace-format-card.card-expanded .pace-days-band{font-size:14px!important}
+.pace-format-card.card-expanded .pace-days-band b{font-size:24px!important}
+.pace-global-wrap .pace-format-card.card-expanded .pace-format-body{grid-template-columns:minmax(360px,1fr) minmax(500px,1fr);gap:28px}
+.pace-global-wrap .pace-format-card.card-expanded .pace-progress-hero{padding:28px!important}
+@media(max-width:900px){.pace-global-wrap .pace-format-card.card-expanded .pace-format-body{grid-template-columns:1fr}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="brand"><img class="aviva-original-logo" src="https://images.crunchbase.com/image/upload/c_pad%2Cf_auto%2Cq_auto%3Aeco%2Cdpr_1/b34fd73568b34ce4a875b069f6eeda41?ik-sanitizeSvg=true" alt="Aviva"><small>CONTROL DE PIONEROS · INSUMOS</small></div><div class="bubble"><b>¿Dónde hace falta actuar?</b><span>Un tablero para escuchar los datos, encontrar los pendientes y dar seguimiento puntual por tienda y colaborador.</span></div><nav><button type="button" class="active" data-tab="resumen" onclick="nav('resumen')">01 · General</button><button data-tab="seguimiento" onclick="nav('seguimiento')">02 · Colaboradores</button><button data-tab="planEnvio" onclick="nav('planEnvio')">03 · Herramientas</button><button data-tab="cobertura" onclick="nav('cobertura')">04 · Pendientes por responder</button><button data-tab="accesos" onclick="nav('accesos')">05 · Accesos</button></nav><div class="workspace-switch"><button type="button" class="on" data-workspace="insumos">Insumos del personal</button><button type="button" data-workspace="metrics">Solo métricas</button></div><div class="sidebar-metric-tabs" id="sidebarMetricTabs"><span>MÉTRICAS</span><button type="button" class="on" data-metric-view="general">01 · General</button><button type="button" data-metric-view="vertical">02 · Metas por formato</button><button type="button" data-metric-view="calculator">03 · Calculadora</button></div><div class="side-foot">Tu historia importa.<br>Los datos también cuentan una historia: úsala para acompañar mejor.</div></aside><main class="main">
 <section class="hero" id="resumen"><div class="eyebrow">Pioneros · septiembre 2026</div><h1>¿Qué necesita atención hoy?</h1><p>Una vista operativa para cruzar respuestas, inventario, tallas y cobertura de tiendas. Filtra por <b>tienda</b> o <b>colaborador</b> y baja directo al seguimiento.</p><div class="tag">Conversaciones que se convierten en acciones</div></section>

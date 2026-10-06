@@ -444,6 +444,35 @@ th{font-weight:700;letter-spacing:.6px}
 .pace-global-wrap .pace-format-card.card-expanded .pace-format-body{grid-template-columns:minmax(360px,1fr) minmax(500px,1fr);gap:28px}
 .pace-global-wrap .pace-format-card.card-expanded .pace-progress-hero{padding:28px!important}
 @media(max-width:900px){.pace-global-wrap .pace-format-card.card-expanded .pace-format-body{grid-template-columns:1fr}}
+</style><style>
+/* Calculadora comercial · rediseño ejecutivo visual */
+#calcRows{display:grid;grid-template-columns:1fr!important;gap:22px}
+.calc-store-card{max-width:none!important}
+.calc-store-title{padding:22px 26px!important;align-items:center!important}
+.calc-store-title h4{font-size:29px!important;line-height:1.05}.calc-store-title span{font-size:11px!important}
+.calc-store-targets{grid-template-columns:repeat(3,minmax(135px,1fr))!important;max-width:600px!important}
+.calc-assumptions{background:#eef8f4!important;border:0!important;padding:16px 20px!important;margin:18px 24px!important}
+.calc-funnel-block{background:#fff!important;border:0!important;margin:0 24px 18px!important;padding:0!important}
+.calc-funnel-head{background:transparent!important;border-bottom:2px solid #00c77b!important;padding:9px 4px!important;margin-bottom:12px!important}
+.calc-funnel-head b{font-size:16px!important;color:#00664f!important}.calc-funnel-head span{font-size:10px!important}
+.calc-two-goals{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important}
+.calc-goal-tier{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:9px!important;background:#eef8f4!important;border:0!important;padding:16px!important}
+.calc-goal-tier>strong{grid-column:1/-1;font-size:13px!important;color:#00664f!important}
+.calc-goal-tier.minimum{background:#f4f8f6!important}.calc-goal-tier.stretch{background:#e7f7f0!important;border:1px solid #69c7a5!important}
+.calc-goal-tier>div{background:#fff!important;border:1px solid #dce8e3!important;min-width:0}
+.calc-goal-tier>div span{font-size:8px!important}.calc-goal-tier b{font-size:21px!important}
+.calc-pace-line{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;margin:4px 24px 24px!important}
+.calc-daily-objectives{grid-column:1/-1!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important}
+.calc-daily-box{display:grid!important;grid-template-columns:1.2fr 1fr 1.35fr!important;align-items:end!important;gap:12px!important;background:#f4f8f6!important;border:0!important}
+.calc-daily-box.stretch{background:#e7f7f0!important;border:1px solid #69c7a5!important}.calc-daily-box span{grid-column:1/-1;color:#00664f!important;font-weight:900!important}
+.calc-daily-box b,.calc-daily-box strong{font-size:19px!important;color:#004d3e!important}
+.calc-expected-line{margin:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;min-height:135px!important;padding:20px 22px!important;background:#edf8f4!important;border-radius:22px!important;font-size:13px!important}
+.calc-expected-line b:first-child{font-size:12px!important;letter-spacing:.4px}.calc-expected-line strong{font-size:20px!important;line-height:1.55!important}
+.calc-actual-progress{margin:0!important;min-height:135px!important;border-radius:22px!important;padding:20px 22px!important;display:grid!important;align-content:center!important}
+.calc-actual-progress span{font-size:11px!important}.calc-actual-progress b{font-size:23px!important}.calc-actual-progress small{font-size:11px!important}
+.calc-actual-progress p{font-size:12px!important}
+@media(max-width:1050px){.calc-goal-tier{grid-template-columns:repeat(3,1fr)!important}.calc-pace-line{grid-template-columns:1fr!important}.calc-expected-line,.calc-actual-progress{grid-column:1!important}}
+@media(max-width:760px){.calc-store-targets{grid-template-columns:1fr!important;max-width:none!important}.calc-two-goals,.calc-daily-objectives{grid-template-columns:1fr!important}.calc-goal-tier{grid-template-columns:1fr 1fr!important}.calc-daily-box{grid-template-columns:1fr!important}.calc-daily-box span{grid-column:1!important}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="brand"><img class="aviva-original-logo" src="https://images.crunchbase.com/image/upload/c_pad%2Cf_auto%2Cq_auto%3Aeco%2Cdpr_1/b34fd73568b34ce4a875b069f6eeda41?ik-sanitizeSvg=true" alt="Aviva"><small>CONTROL DE PIONEROS · INSUMOS</small></div><div class="bubble"><b>¿Dónde hace falta actuar?</b><span>Un tablero para escuchar los datos, encontrar los pendientes y dar seguimiento puntual por tienda y colaborador.</span></div><nav><button type="button" class="active" data-tab="resumen" onclick="nav('resumen')">01 · General</button><button data-tab="seguimiento" onclick="nav('seguimiento')">02 · Colaboradores</button><button data-tab="planEnvio" onclick="nav('planEnvio')">03 · Herramientas</button><button data-tab="cobertura" onclick="nav('cobertura')">04 · Pendientes por responder</button><button data-tab="accesos" onclick="nav('accesos')">05 · Accesos</button></nav><div class="workspace-switch"><button type="button" class="on" data-workspace="insumos">Insumos del personal</button><button type="button" data-workspace="metrics">Solo métricas</button></div><div class="sidebar-metric-tabs" id="sidebarMetricTabs"><span>MÉTRICAS</span><button type="button" class="on" data-metric-view="general">01 · General</button><button type="button" data-metric-view="vertical">02 · Metas por formato</button><button type="button" data-metric-view="calculator">03 · Calculadora</button></div><div class="side-foot">Tu historia importa.<br>Los datos también cuentan una historia: úsala para acompañar mejor.</div></aside><main class="main">
 <section class="hero" id="resumen"><div class="eyebrow">Pioneros · septiembre 2026</div><h1>¿Qué necesita atención hoy?</h1><p>Una vista operativa para cruzar respuestas, inventario, tallas y cobertura de tiendas. Filtra por <b>tienda</b> o <b>colaborador</b> y baja directo al seguimiento.</p><div class="tag">Conversaciones que se convierten en acciones</div></section>

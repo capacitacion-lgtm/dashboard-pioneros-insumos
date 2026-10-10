@@ -738,7 +738,19 @@ function brainStoreOpeningDay(row){var date=row[5]||'';if(!/^\d{4}-\d{2}-\d{2}$/
 var brainHighlightedSeries=null;
 function renderBrainStoreDetail(){
  var fmt=document.getElementById('brainStoreFormat').value,scope=document.getElementById('brainStoreScope').value,rows=brainStoreList().filter(function(x){return (!fmt||x[2]===fmt)&&(scope==='all'||brainSelectedStores.has(x[0]))}),months=Object.keys(AVIVA_BRAIN_STORE_DRAFT),values=months.map(function(m){return rows.reduce(function(a,x){return a+(AVIVA_BRAIN_STORE_DRAFT[m][x[0]]||0)},0)}),mode=document.getElementById('brainHistoryView').value,seriesMode=document.getElementById('brainSeriesMode').value,individual=seriesMode==='individual'||(seriesMode==='auto'&&rows.length>1),byFormat=seriesMode==='format',byWave=seriesMode==='wave',chart=document.getElementById('brainHistoryChart'),w=1000,h=560,p=85;
- var amountRange=document.getElementById('brainAmountRange').value,historicalMonths=months;if(amountRange!=='all'){var floor=Number(amountRange);rows=brainStoreList().filter(function(x){if(fmt&&x[2]!==fmt)return false;return historicalMonths.some(function(m){var amount=Number(AVIVA_BRAIN_STORE_DRAFT[m][x[0]]||0);return amount>0&&(floor===500000?amount>=500000:amount>=floor&&amount<floor+100000)})});values=months.map(function(m){return rows.reduce(function(a,x){return a+(AVIVA_BRAIN_STORE_DRAFT[m][x[0]]||0)},0)});if(seriesMode==='auto')individual=rows.length>1}
+ var amountRange=document.getElementById('brainAmountRange').value;
+ if(amountRange!=='all'){
+  var lowerBound=Number(amountRange),upperBound=lowerBound===500000?Infinity:lowerBound+100000;
+  rows=brainStoreList().filter(function(store){
+   if(fmt&&store[2]!==fmt)return false;
+   return months.some(function(month){
+    var amount=Number((AVIVA_BRAIN_STORE_DRAFT[month]||{})[store[0]]||0);
+    return amount>0&&amount>=lowerBound&&amount<upperBound;
+   });
+  });
+  values=months.map(function(month){return rows.reduce(function(sum,store){return sum+Number((AVIVA_BRAIN_STORE_DRAFT[month]||{})[store[0]]||0)},0)});
+  if(seriesMode==='auto')individual=rows.length>1;
+ }
  var waveGroups={};rows.forEach(function(x){var date=x[5]||'',key=x[2]==='Sam’s'?(date<'2026-09-01'?'Sam’s · Ola 1 (julio)':'Sam’s · Ola 2 (septiembre)'):x[2]+' · '+(date?date.slice(0,7):'Sin fecha');(waveGroups[key]||(waveGroups[key]=[])).push(x)});
  var waveSelect=document.getElementById('brainWaveFilter'),waveWrap=document.getElementById('brainWaveFilterWrap'),waveKeys=Object.keys(waveGroups).sort();waveWrap.style.display=byWave?'':'none';var selectedWave=waveSelect.value;
  if(byWave){waveSelect.innerHTML='<option value="">Todas las olas (comparar totales)</option>'+waveKeys.map(function(k){return '<option value="'+esc(k)+'">'+esc(brainWaveDisplayName(k))+' · '+waveGroups[k].length+' tiendas</option>'}).join('');if(waveKeys.includes(selectedWave))waveSelect.value=selectedWave;else{waveSelect.value='';selectedWave=''}}

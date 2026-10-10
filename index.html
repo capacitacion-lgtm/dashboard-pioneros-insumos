@@ -765,7 +765,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-char
  var open=document.getElementById('brainChartExpand'),close=document.getElementById('brainChartClose'),modal=document.getElementById('brainChartModal'),body=document.getElementById('brainChartModalBody'),chart=document.getElementById('brainHistoryChart');
  if(!open||!close||!modal||!body||!chart)return;
  var controls=document.getElementById('brainChartModalControls'),panel=chart.parentNode,items=['brainStoreFormat','brainStoreScope','brainStorePicker','brainStoreSummary','brainSeriesMode','brainWaveFilter','brainTrendShowStoreBars','brainTrendShowSales'],moved=[],original=[];
- function dismiss(){if(modal.hidden)return;modal.hidden=true;document.body.classList.remove('brain-modal-open');moved.forEach(function(item,i){original[i].parent.insertBefore(item,original[i].next)});moved=[];original=[];panel.appendChild(chart);open.focus()}
+ function dismiss(){if(modal.hidden)return;modal.hidden=true;document.body.classList.remove('brain-modal-open');panel.appendChild(chart);for(var i=moved.length-1;i>=0;i--){var destination=original[i].parent,anchor=original[i].next;destination.insertBefore(moved[i],anchor&&anchor.parentNode===destination?anchor:null)}moved=[];original=[];open.focus()}
  open.addEventListener('click',function(){
   var wrapper=document.createElement('div');wrapper.className='brain-modal-filter-grid';controls.replaceChildren(wrapper);
   items.forEach(function(id){var el=document.getElementById(id);if(!el)return;var item=el.closest('label')||el; if(moved.includes(item))return;original.push({parent:item.parentNode,next:item.nextSibling});moved.push(item);wrapper.appendChild(item)});

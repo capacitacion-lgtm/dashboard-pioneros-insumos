@@ -1235,21 +1235,34 @@ out.textContent=example;
 }
 document.addEventListener('DOMContentLoaded',renderRiskTacticDemo);
 function commercialTacticMessage(r,mode){
-var name=(r.x[6]||'Pionero AVIVA').trim().split(/\s+/)[0],fmt=String(r.x[2]||'').toLowerCase(),meta=fmt.includes('sam')?3:4,days=Math.max(1,riskStoreTiming(r.key,riskCutoffDate()).elapsed),avg=r.req/days,ratio=avg/meta,day=new Date(riskCutoffDate()+'T12:00:00').getDay();
-var tactics=[
-['Cerrar oportunidades','¿Ya retomaste a quienes dejaron una solicitud o compra pendiente?','¿Ya pediste apoyo a tus aliados para identificar oportunidades de cierre?','¿Qué oportunidad lograste recuperar hoy?'],
-['Activar alianzas','¿Ya hablaste con los vendedores y responsables de áreas clave?','¿Ya acordaron cómo acercarte clientes que necesitan financiamiento?','¿Qué alianzas activaste y cuántas oportunidades generaron?'],
-['Abordar con intención','¿Estás preguntando qué necesita comprar el cliente antes de ofrecer financiamiento?','¿Estás identificando y resolviendo las objeciones de los clientes?','¿Qué objeción se repitió y cómo la resolviste?'],
-['Referidos y seguimiento','¿Ya retomaste a los clientes interesados que no terminaron su compra?','¿Estás solicitando referidos de forma natural y sin presionar?','¿Cuántos referidos y seguimientos generaste?'],
-['Preparar agenda comercial','¿Ya identificaste productos y promociones para el fin de semana?','¿Ya acordaste con tus aliados las oportunidades de las próximas jornadas?','¿Cuáles serán tus tres prioridades comerciales? Si hoy descansas, lo revisamos a tu regreso.'],
-['Activar el fin de semana','¿Ya tienes agenda de clientes interesados y aliados para sábado y domingo?','¿Ya validaste si la tienda autoriza utilizar el voceo?','¿Qué oportunidades tienes preparadas para mañana?'],
-['Ejecutar y convertir','¿Ya recorriste las áreas de mayor oportunidad en lugar de esperar en el kiosco?','¿Estás acompañando al cliente desde la solicitud hasta la compra?','¿Qué alianza generó más solicitudes y cierres?']
-],t=tactics[day];
-var formatTip=fmt.includes('sam')?'En Sam’s, aprovecha las necesidades de socios que compran para su hogar o negocio.':fmt.includes('walmart')?'En Walmart, trabaja con electrónica y línea blanca para identificar compras que necesitan financiamiento.':'En SBA, fortalece la coordinación con vendedores de piso, cajas y venta en línea cuando corresponda.';
-var level=ratio<.8?'GENERAR OPORTUNIDADES':ratio<1?'MEJORAR CONVERSIÓN':'IMPULSAR DESEMBOLSOS Y CIERRES';
-var tip=ratio<.8?'Prioriza conversaciones de calidad, abordaje, alianzas y referidos para aumentar las solicitudes.':ratio<1?'Ya estás cerca de la meta de solicitudes: enfócate en seguimiento, objeciones y solicitudes completas.':'Tu ritmo de solicitudes cumple la meta: revisa aprobaciones, desembolsos y oportunidades que aún no se concretan.';
-var intro=mode==='risk'?'Hoy trabajaremos en recuperar el ritmo y salir de la zona de riesgo.':'¡Ya salimos de la zona de riesgo! Ahora vamos por el 100% y después el 120%.';
-return '🐆 ¡'+name+'! '+intro+'\n\n🎯 RETO DE HOY: '+t[0]+'\n📊 Productividad: '+avg.toFixed(2)+' solicitudes/día · Meta '+meta+' · '+Math.round(ratio*100)+'% del ritmo requerido.\n🔎 ENFOQUE: '+level+'\n\n✅ '+t[1]+'\n✅ '+t[2]+'\n\n💡 '+formatTip+'\n'+tip+'\n\n🔥 Recuerda: no esperamos las oportunidades, las construimos.\n\nAL CIERRE CUÉNTAME: '+t[3]+'\n\n¡Vamos por más! 🐆';
+var name=String(r.x[6]||'Pionero').trim().split(/\s+/)[0],fmt=String(r.x[2]||''),meta=fmt.toLowerCase().includes('sam')?3:4,elapsed=Math.max(1,riskStoreTiming(r.key,riskCutoffDate()).elapsed),avg=r.req/elapsed,ratio=avg/meta,day=new Date(riskCutoffDate()+'T12:00:00').getDay();
+if(day===4)return '🐆 ¡'+name+'! Hoy es tu día de descanso. Disfrútalo; retomamos nuestro acompañamiento el viernes.';
+var focus=ratio<.8?'generar más solicitudes':ratio<1?'mejorar el seguimiento y la conversión':'convertir las oportunidades en desembolsos';
+var low=[
+['Línea blanca','Preséntate con los asesores e identifica compras detenidas por presupuesto. Acuerden cuándo presentarte a un cliente interesado.'],
+['Vendedores de piso','Recorre las áreas de mayor movimiento y explica brevemente cómo identificar a alguien que necesita una alternativa de financiamiento.'],
+['Línea de cajas','Con autorización de la tienda, acuerda cómo orientar hacia Aviva a clientes interesados sin interrumpir el cobro.']];
+var mid=[
+['Agenda de clientes','Retoma primero a quienes aceptaron seguimiento y todavía tienen una compra pendiente.'],
+['Objeciones','Escucha por qué no avanzó cada oportunidad y aclara las condiciones del financiamiento sin presionar.'],
+['Alianzas','Coordina con vendedores los siguientes pasos de clientes interesados.']];
+var high=[
+['Aprobados pendientes','Identifica a quienes tienen aprobación pero todavía no concretan la compra y aceptaron seguimiento.'],
+['Motivo de no desembolso','Averigua si la duda es sobre costo, plazo, monto o producto y explica las condiciones reales.'],
+['Cierre acompañado','Coordina con el vendedor la disponibilidad del producto y los pasos para comprar, respetando la decisión del cliente.']];
+var generic=ratio<.8?low:ratio<1?mid:high;
+var plans={
+0:[['Clientes de la semana','Retoma a los interesados que autorizaron seguimiento y no concretaron su compra.'],['Aprobaciones pendientes','Aclara las dudas que frenan desembolsos y acompaña a quienes decidan continuar.'],['Últimas oportunidades','Coordina con los vendedores las compras que todavía pueden concretarse hoy.']],
+1:[['Aprendizaje de la semana anterior','Identifica qué acción generó más oportunidades y cuál fue el principal obstáculo. Repite lo que funcionó.'],generic[0],generic[1]],
+2:[['Abordaje de calidad','Pregunta qué quiere comprar el cliente y qué le impide hacerlo hoy.'],generic[1],generic[2]],
+3:[['Recuperación de interesados','Organiza a los clientes que aceptaron seguimiento y no terminaron su compra.'],generic[0],generic[2]],
+5:[['Alianzas para el fin de semana','Retoma contacto con las áreas de mayor oportunidad y acuerda cómo referir clientes.'],generic[0],generic[1]],
+6:[['Recorrido comercial','Acércate a las áreas con intención de compra en lugar de esperar únicamente en el kiosco.'],generic[1],generic[2]]
+};
+var title={0:'recuperar clientes de la semana y cerrar fuerte',1:'aprender de la semana anterior y activar alianzas',2:'mejorar el abordaje y resolver objeciones',3:'activar referidos y seguimiento',5:'preparar oportunidades para el fin de semana',6:'convertir oportunidades en ventas'}[day];
+var steps=plans[day],formatTip=fmt.toLowerCase().includes('sam')?'En Sam’s, aprovecha las necesidades de compra de los socios.':fmt.toLowerCase().includes('walmart')?'En Walmart, trabaja especialmente con línea blanca y electrónica.':'En SBA, apóyate en vendedores de piso y cajas cuando la tienda lo autorice.';
+var intro=mode==='risk'?'Vamos a recuperar el ritmo con acciones concretas.':'Vamos a sostener tu recuperación y avanzar hacia el 120%.';
+return '🐆 ¡Hola, '+name+'! '+intro+'\n\n📊 Tu promedio es de '+avg.toFixed(1)+' solicitudes al día frente a una meta de '+meta+'. Ya tienes el detalle de tus resultados y tu proyección en la ficha que te comparto.\n\n🎯 Hoy nuestro objetivo es '+title+'.\n\nSigue estas recomendaciones:\n\n'+steps.map(function(t,i){return (i+1)+'. '+t[0]+': '+t[1]}).join('\n\n')+'\n\n💡 '+formatTip+'\n\nPrioridad: '+focus+' sin sacrificar la calidad de la atención.\n\n🔥 ¡Vamos por un gran resultado! 🐆';
 }
 function copyTacticText(msg){function fallback(){window.prompt('Copia el mensaje:',msg)}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(msg).then(function(){alert('Mensaje táctico copiado')}).catch(fallback);else fallback()}
 function copyCommercialPulseMessage(key){var r=riskRowByKey(key);if(r)copyTacticText(commercialTacticMessage(r,'pulse'))}

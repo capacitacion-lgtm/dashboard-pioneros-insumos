@@ -1242,6 +1242,17 @@ var example='🐆 ¡Pionero! La semana pasada cerraste con un promedio ilustrati
 out.textContent=example;
 }
 document.addEventListener('DOMContentLoaded',renderRiskTacticDemo);
+function riskWeeklyEvolution(r){
+var h=riskHistory(),days=h.days||{},cut=riskCutoffDate(),currentWeek=riskContactWeek(),weekEnd=new Date(currentWeek+'T12:00:00'),previousEnd=new Date(weekEnd);previousEnd.setDate(previousEnd.getDate()-7);var prevSunday=previousEnd.toISOString().slice(0,10);
+var priorDates=Object.keys(days).filter(function(d){return d<=prevSunday&&days[d]&&days[d][r.key]&&Number.isFinite(Number(days[d][r.key].proj))}).sort();
+var prior=priorDates.length?days[priorDates[priorDates.length-1]][r.key]:null;
+if(!prior){var rec=riskState()[r.key]||{},snaps=Object.values(rec.snapshots||{}).filter(function(z){return z&&z.date&&z.date<=prevSunday&&Number.isFinite(Number(z.projection))}).sort(function(a,b){return a.date.localeCompare(b.date)});if(snaps.length)prior={proj:Number(snaps[snaps.length-1].projection)}}
+if(!prior)return '';
+var before=Number(prior.proj),now=Number(r.proj),diff=now-before,fmt=function(n){return n.toFixed(1).replace(/\\.0$/,'')};
+if(Math.abs(diff)<.5)return '📈 Tu evolución semanal: la semana pasada proyectabas '+fmt(before)+'% y hoy '+fmt(now)+'%. Te mantuviste prácticamente igual; vamos a impulsar nuevas oportunidades para superar ese ritmo.\n\n';
+if(diff>0)return '📈 Tu evolución semanal: la semana pasada proyectabas '+fmt(before)+'% y hoy '+fmt(now)+'%. ¡Mejoraste '+fmt(diff)+' puntos porcentuales! Es un avance valioso; sigamos construyendo para cerrar más fuerte.\n\n';
+return '📉 Tu evolución semanal: la semana pasada proyectabas '+fmt(before)+'% y hoy '+fmt(now)+'%. Retrocedimos '+fmt(-diff)+' puntos porcentuales; revisemos qué frenó las oportunidades y recuperemos el ritmo con acciones concretas.\n\n';
+}
 function commercialTacticMessage(r,mode){
 var name=String(r.x[6]||'Pionero').trim().split(/\s+/)[0],fmt=String(r.x[2]||''),meta=fmt.toLowerCase().includes('sam')?3:4,elapsed=Math.max(1,riskStoreTiming(r.key,riskCutoffDate()).elapsed),avg=r.req/elapsed,ratio=avg/meta,day=new Date(riskCutoffDate()+'T12:00:00').getDay();
 if(day===4)return '🐆 ¡'+name+'! Hoy es tu día de descanso. Disfrútalo; retomamos nuestro acompañamiento el viernes.';
@@ -1269,8 +1280,8 @@ var plans={
 };
 var title={0:'recuperar clientes de la semana y cerrar fuerte',1:'aprender de la semana anterior y activar alianzas',2:'mejorar el abordaje y resolver objeciones',3:'activar referidos y seguimiento',5:'preparar oportunidades para el fin de semana',6:'convertir oportunidades en ventas'}[day];
 var steps=plans[day],formatTip=fmt.toLowerCase().includes('sam')?'En Sam’s, aprovecha las necesidades de compra de los socios.':fmt.toLowerCase().includes('walmart')?'En Walmart, trabaja especialmente con línea blanca y electrónica.':'En SBA, apóyate en vendedores de piso y cajas cuando la tienda lo autorice.';
-var intro=mode==='risk'?'Vamos a recuperar el ritmo con acciones concretas.':'Vamos a sostener tu recuperación y avanzar hacia el 120%.';
-return '🐆 ¡Hola, '+name+'! '+intro+'\n\n📊 Tu promedio es de '+avg.toFixed(1)+' solicitudes al día frente a una meta de '+meta+'. Ya tienes el detalle de tus resultados y tu proyección en la ficha que te comparto.\n\n🎯 Hoy nuestro objetivo es '+title+'.\n\nSigue estas recomendaciones:\n\n'+steps.map(function(t,i){return (i+1)+'. '+t[0]+': '+t[1]}).join('\n\n')+'\n\n💡 '+formatTip+'\n\nPrioridad: '+focus+' sin sacrificar la calidad de la atención.\n\n🔥 ¡Vamos por un gran resultado! 🐆';
+var intro=mode==='risk'?'Vamos a recuperar el ritmo con acciones concretas.':'Vamos a avanzar hacia el 120% con acciones concretas.';
+return '🐆 ¡Hola, '+name+'! '+intro+'\n\n'+riskWeeklyEvolution(r)+'📊 Tu promedio es de '+avg.toFixed(1)+' solicitudes al día frente a una meta de '+meta+'. Ya tienes el detalle de tus resultados y tu proyección en la ficha que te comparto.\n\n🎯 Hoy nuestro objetivo es '+title+'.\n\nSigue estas recomendaciones:\n\n'+steps.map(function(t,i){return (i+1)+'. '+t[0]+': '+t[1]}).join('\n\n')+'\n\n💡 '+formatTip+'\n\nPrioridad: '+focus+' sin sacrificar la calidad de la atención.\n\n🔥 ¡Vamos por un gran resultado! 🐆';
 }
 function copyTacticText(msg){function fallback(){window.prompt('Copia el mensaje:',msg)}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(msg).then(function(){alert('Mensaje táctico copiado')}).catch(fallback);else fallback()}
 function copyCommercialPulseMessage(key){var r=riskRowByKey(key);if(r)copyTacticText(commercialTacticMessage(r,'pulse'))}

@@ -1243,15 +1243,17 @@ out.textContent=example;
 }
 document.addEventListener('DOMContentLoaded',renderRiskTacticDemo);
 function riskWeeklyEvolution(r){
-var h=riskHistory(),days=h.days||{},cut=riskCutoffDate(),currentWeek=riskContactWeek(),weekEnd=new Date(currentWeek+'T12:00:00'),previousEnd=new Date(weekEnd);previousEnd.setDate(previousEnd.getDate()-7);var prevSunday=previousEnd.toISOString().slice(0,10);
-var priorDates=Object.keys(days).filter(function(d){return d<=prevSunday&&days[d]&&days[d][r.key]&&Number.isFinite(Number(days[d][r.key].proj))}).sort();
-var prior=priorDates.length?days[priorDates[priorDates.length-1]][r.key]:null;
-if(!prior){var rec=riskState()[r.key]||{},snaps=Object.values(rec.snapshots||{}).filter(function(z){return z&&z.date&&z.date<=prevSunday&&Number.isFinite(Number(z.projection))}).sort(function(a,b){return a.date.localeCompare(b.date)});if(snaps.length)prior={proj:Number(snaps[snaps.length-1].projection)}}
+var days=riskHistory().days||{},cut=riskCutoffDate(),week=riskContactWeek(),end=new Date(week+'T12:00:00'),prevEnd=new Date(end);prevEnd.setDate(end.getDate()-7);
+var prevSunday=prevEnd.toISOString().slice(0,10),prevMonday=new Date(prevEnd);prevMonday.setDate(prevEnd.getDate()-6);var first=prevMonday.toISOString().slice(0,10);
+var dates=Object.keys(days).filter(function(d){return d>=first&&d<=prevSunday&&days[d]&&days[d][r.key]&&Number.isFinite(Number(days[d][r.key].proj))}).sort();
+var prior=dates.length?{proj:Number(days[dates[dates.length-1]][r.key].proj),date:dates[dates.length-1]}:null;
+if(!prior){var snaps=Object.values((riskState()[r.key]||{}).snapshots||{}).filter(function(z){return z&&z.date>=first&&z.date<=prevSunday&&Number.isFinite(Number(z.projection))}).sort(function(a,b){return a.date.localeCompare(b.date)});if(snaps.length)prior={proj:Number(snaps[snaps.length-1].projection),date:snaps[snaps.length-1].date}}
 if(!prior)return '';
-var before=Number(prior.proj),now=Number(r.proj),diff=now-before,fmt=function(n){return n.toFixed(1).replace(/\\.0$/,'')};
-if(Math.abs(diff)<.5)return '📈 Tu evolución semanal: la semana pasada proyectabas '+fmt(before)+'% y hoy '+fmt(now)+'%. Te mantuviste prácticamente igual; vamos a impulsar nuevas oportunidades para superar ese ritmo.\n\n';
-if(diff>0)return '📈 Tu evolución semanal: la semana pasada proyectabas '+fmt(before)+'% y hoy '+fmt(now)+'%. ¡Mejoraste '+fmt(diff)+' puntos porcentuales! Es un avance valioso; sigamos construyendo para cerrar más fuerte.\n\n';
-return '📉 Tu evolución semanal: la semana pasada proyectabas '+fmt(before)+'% y hoy '+fmt(now)+'%. Retrocedimos '+fmt(-diff)+' puntos porcentuales; revisemos qué frenó las oportunidades y recuperemos el ritmo con acciones concretas.\n\n';
+var before=prior.proj,now=Number(r.proj),diff=now-before,fmt=function(n){return n.toFixed(1).replace(/\\.0$/,'')},from='En el corte del '+prior.date.slice(8,10)+' de octubre proyectabas '+fmt(before)+'% y hoy estás en '+fmt(now)+'%. ';
+if(Math.abs(diff)<.5)return '📊 Tu evolución semanal: '+from+'Te mantuviste prácticamente igual. Vamos a impulsar nuevas oportunidades para superar ese ritmo.\n\n';
+if(diff>0)return '📈 Tu evolución semanal: '+from+'¡Mejoraste '+fmt(diff)+' puntos porcentuales! Reconozcamos el avance y sigamos construyendo para cerrar más fuerte.\n\n';
+if(before>=100&&now<80)return '📉 Tu evolución semanal: '+from+'Bajaste '+fmt(-diff)+' puntos porcentuales y pasaste de proyectar la meta a estar en riesgo. Sabemos que puedes recuperar ese ritmo: enfoquémonos en las oportunidades concretas de esta semana.\n\n';
+return '📉 Tu evolución semanal: '+from+'Retrocediste '+fmt(-diff)+' puntos porcentuales. Revisemos qué frenó las oportunidades y recuperemos el ritmo con acciones concretas.\n\n';
 }
 function commercialTacticMessage(r,mode){
 var name=String(r.x[6]||'Pionero').trim().split(/\s+/)[0],fmt=String(r.x[2]||''),meta=fmt.toLowerCase().includes('sam')?3:4,elapsed=Math.max(1,riskStoreTiming(r.key,riskCutoffDate()).elapsed),avg=r.req/elapsed,ratio=avg/meta,day=new Date(riskCutoffDate()+'T12:00:00').getDay();

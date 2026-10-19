@@ -884,7 +884,7 @@ var data=[
 {key:'Walmart|0407',name:'Jiutepec',fmt:'Walmart',aug:126700,sep:29500,oct:0,average:(126700+29500)/3,status:'Ingreso programado 20/oct'},
 {key:'Walmart|0409',name:'Hospital General',fmt:'Walmart',aug:79800,sep:10000,oct:0,average:(79800+10000)/3,status:'Ingreso programado miércoles 21/oct'},
 {key:'Sam’s|0443',name:'Santín',fmt:'Sam’s',aug:null,sep:8000,oct:24000,average:(8000+24000)/2,status:'Vacante'},
-{key:'Walmart|0450',name:'La Cruz',fmt:'Walmart',aug:null,sep:null,oct:0,average:0,status:'Ingreso programado 15/oct'}
+{key:'Walmart|0450',name:'La Cruz',fmt:'Walmart',aug:null,sep:null,oct:0,average:0,status:'Vacante'}
 ];
 var md=metricFormatData(),active=data.filter(function(v){var x=STORE_MASTER.find(function(x){return x[2]+'|'+x[0]===v.key});return x&&metricCoverageState(x,md[v.key]||{})==='vacant'}).sort(function(a,b){return b.average-a.average});
 var tbody=document.getElementById('vacancyPriorityRows'),summary=document.getElementById('vacancyPrioritySummary');if(!tbody||!summary)return;

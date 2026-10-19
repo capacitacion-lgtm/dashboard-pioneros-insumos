@@ -4,7 +4,7 @@ Dashboard interno para seguimiento comercial y operativo de los Pioneros de **Wa
 
 **Sitio:** https://capacitacion-lgtm.github.io/dashboard-pioneros-insumos/  
 **Repositorio:** https://github.com/capacitacion-lgtm/dashboard-pioneros-insumos  
-**Última actualización de documentación:** 12 de octubre de 2026.
+**Última actualización de documentación:** 19 de octubre de 2026.
 
 > Herramienta interna de seguimiento. Las proyecciones son estimaciones basadas en los cortes disponibles y no equivalen a ventas de cierre definitivas.
 
@@ -110,3 +110,39 @@ La aplicación se sirve desde GitHub Pages y contiene lógica del dashboard en `
 La rama `main` alimenta el sitio de GitHub Pages. Los cambios pueden tardar unos minutos en publicarse. Para revisar una actualización, abrir el sitio y, si es necesario, forzar recarga del navegador.
 
 No incluir en el repositorio datos sensibles, credenciales o tokens de Slack.
+
+
+## Actualización operativa · 19 de octubre de 2026
+
+### Pestaña de Vacantes
+
+El dashboard contempla una vista de vacantes priorizadas por productividad histórica promedio, para orientar cobertura y reclutamiento. **Los datos siguientes son referencias comunicadas para seguimiento; no constituyen un nuevo corte de ventas validado.**
+
+| Tienda | Agosto | Septiembre | Octubre (referencia) | Promedio simple de los 3 meses | Seguimiento |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Jiutepec | $126,700 | $29,500 | $0 | $52,066.67 | Ingreso a capacitación programado 20/oct |
+| Hospital General | $79,800 | $10,000 | $0 | $29,933.33 | Ingreso a tienda programado 21/oct |
+| Santín–Vedio | Sin dato | $8,000 | $24,000 | $16,000 (2 meses disponibles) | Vacante, pendiente de confirmar cobertura |
+| La Cruz | Sin dato | Sin dato | $0 | No calculable | Vacante; último lugar de prioridad por referencia cero |
+
+**Criterios:** calcular promedios únicamente sobre meses con dato explícito, sin confundir ausencia de dato con ventas cero; ordenar por promedio descendente y mostrar los ingresos *programados* como tales hasta confirmar su realización. La situación de cobertura puede cambiar con nuevas confirmaciones. Los datos anteriores de octubre no deben interpretarse como cierre mensual.
+
+### Rentabilidad por vertical · diseño pendiente de datos financieros
+
+Se propone una sección para **Walmart, Sam's Club y Super Bodega Aurrera** con comparativos de utilidad, margen, porcentaje de tiendas rentables, tiempo al punto de equilibrio, evolución mensual, impacto de vacantes y reconocimiento de mejoras.
+
+- Distinguir **punto de equilibrio mensual** (ingresos del mes ≥ costos del mes) de **recuperación acumulada de inversión** (utilidad acumulada ≥ 0).
+- Medir por separado quién llega primero a rentabilidad, quién presenta mayor margen y quién aporta más utilidad absoluta.
+- Incorporar una vista ejecutiva por vertical y desglose por tienda, además de simulación con parámetros explícitos.
+- **Pendiente:** recibir y validar ingresos, costos, P&L, fechas de inicio y definiciones contables. No publicar utilidades, márgenes ni tiempos como reales hasta disponer de fuentes verificadas.
+
+### Integración con HubSpot · propuesta, no conectada al sitio
+
+Se contempla utilizar HubSpot como fuente de datos comerciales para solicitudes, etapas, montos y fechas, sujeto a los campos y permisos disponibles. **Conectar HubSpot a ChatGPT no sincroniza automáticamente GitHub Pages.** Para actualizaciones automáticas del sitio se requiere una integración independiente y segura (backend o tarea programada), mapeo de identificadores, validación de datos y control de acceso. Nunca publicar tokens, credenciales ni datos personales sensibles en archivos públicos del repositorio.
+
+### Calidad y despliegue
+
+- Conservar una copia o referencia de la última versión estable antes de modificar la interfaz.
+- Validar carga inicial, navegación, filtros, pestaña Vacantes y consistencia de totales después de cada despliegue.
+- Diferenciar claramente cortes confirmados, datos locales del navegador, proyecciones y ejemplos.
+- La actualización de este README **no modifica** el código del dashboard ni confirma que una funcionalidad nueva esté implementada.

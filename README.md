@@ -146,3 +146,17 @@ Se contempla utilizar HubSpot como fuente de datos comerciales para solicitudes,
 - Validar carga inicial, navegación, filtros, pestaña Vacantes y consistencia de totales después de cada despliegue.
 - Diferenciar claramente cortes confirmados, datos locales del navegador, proyecciones y ejemplos.
 - La actualización de este README **no modifica** el código del dashboard ni confirma que una funcionalidad nueva esté implementada.
+
+### Regla de metas para nuevos ingresos · octubre 2026
+
+Los Pioneros laboran de **viernes a miércoles**, con **descanso los jueves**. Octubre de 2026 tiene **26 días laborables** bajo esta regla. Para un nuevo ingreso, la meta mensual completa se prorratea por los días laborables comprendidos entre la fecha de ingreso a tienda (inclusive) y el último día del mes; los jueves no cuentan.
+
+| Formato | Meta mensual completa de nuevo ingreso |
+| --- | ---: |
+| Sam's Club | MX$ 100,000 |
+| Super Bodega Aurrera (SBA) | MX$ 120,000 |
+| Walmart | MX$ 125,000 |
+
+**Fórmula:** meta ajustada = techo(meta mensual completa ÷ días laborables del mes × días laborables desde el ingreso). Redondear hacia arriba al peso.
+
+**Ejemplo confirmado: Plaza El Paseo (Walmart, 0264).** Vianet Agama Carpintero ingresó a tienda el **miércoles 14 de octubre de 2026**. Del 14 al 31 hay 18 días calendario y **15 laborables** (sin los jueves 15, 22 y 29). Meta ajustada de octubre: **techo(125,000 ÷ 26 × 15) = MX$ 72,116**. La fecha 14/oct ya figura en el dashboard. **Este registro documental no equivale a modificar automáticamente la meta del código ni el estado local del navegador.**
